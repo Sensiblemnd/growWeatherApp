@@ -1,0 +1,40 @@
+*, 
+*:before, 
+*:after { 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box; 
+	box-sizing: border-box;
+ }
+ html{
+ 	font-size:62.5%; 
+		  /*
+		 set font size to this percentage so we can use rems more easily
+		  EXAMPLE 
+			font-size: 1.4rem; 
+			font-size: 2.4rem;
+		  */
+		 }
+
+
+
+ html, body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		overflow: visible;
+		font-family:  sans-serif;
+		
+		 font-weight: 400;
+		 background-color: #fff;
+		
+
+		  
+}
+body {
+	font-size: 16px; 
+	font-size: 1.6rem;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	
+	
+}
