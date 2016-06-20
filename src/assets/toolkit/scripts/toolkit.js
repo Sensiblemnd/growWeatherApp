@@ -8,19 +8,8 @@
 
 
 const $ = require('jquery');
-// const React = require('react');
-// const reactRouter = require('react-router');
-// const reactDom = require('react-dom');
 const moment = require('moment');
 const axios = require('axios');
-
-// class card extends React.Component {
-//   render () {
-//     return <p> Hello React!</p>;
-//   }
-// }
-// render(<card/>, document.getElementById('app'));
-
 
 
 
@@ -55,8 +44,7 @@ let app = {
 		that.eventListener();
 		that.skycons = new Skycons({"color": "black"});
 		that.getLatitudeLongitudegetWeather();
-		// that.skycons.add("icon1", Skycons.PARTLY_CLOUDY_DAY);
-		// that.skycons.play();
+		
 	},
 	loadingScreen: function(){
 		that.loader = $('.loading-screen');
@@ -78,81 +66,17 @@ let app = {
 			//hide the clone
 			
 		}else{
+			 $('.card').find('.card-ten-hour').removeClass('expand');
 			$('.card').removeClass('active');
 			$(this).addClass('active');
-
 			$(this).one("transitionend webkitTransitionEnd ", that.expandCard);
-			
-			
 		};
 	},
 	expandCard: function(){
-		 $('.card').find('.card-ten-hour').removeClass('expand');
+		
 		//Expand the Hours
 		$(this).find('.card-ten-hour').addClass('expand');
 	},
-	// cloneCard: function(ele){
-	// 	let that = this;
-	// 	let $clone = $('.card-clone');
-	// 	let $element = $(ele);
-		
-	// 	let element = {
-	// 		'top': 0,
-	// 		'left': 0,
-	// 		'width': 0,
-	// 		'height': 0
-	// 	};
-
-		
-
-	// 	let offset = $element.offset();
-	// 	element.top = offset.top - $(document).scrollTop();
-	// 	element.left = offset.left;
-	// 	element.width = $element.width();
-	// 	element.height = $element.height();
-
-	// 	 $clone.html($element.html());
-	// 	that.initIcons(true);
-		
-	// 	$clone.css({
-	// 	'display': 'block',
-	// 	'top': element.top,
-	// 	'left': element.left
-	// 	});
-	// 	that.cloneAnimate(ele);
-
-	// },
-	//cloneAnimate: function(){
-
-		// let that = this;
-		// let $clone = $('.card-clone');
-
-		// $clone.find('.card-content').css({
-		//   //  'transform': 'rotateY(0deg)'
-		// });
-		// $clone.find('card-ten-hour').css({
-		//  //   'transform': 'rotateY(-180deg)'
-		// });
-
-		// $clone.on("transitionend webkitTransitionEnd oTransitionEnd", function (e) {
-		// if (e.target === e.currentTarget) {
-		// 	if (e.originalEvent.propertyName == 'top') {
-
-		// 		//Toggle the clone state
-		// 		cloneflipped = !cloneflipped;
-
-		// 		//Detect if our clone has returned to the original position and then hide it
-		// 		if (!cloneflipped) {
-		// 			$(element).css('opacity', 1);
-		// 			$($clone).hide();
-		// 		} else {
-		// 		//Need to dynamically alter contents of the clone rear AFTER it animates? Do it here
-		// 		//$('#cloneBack').html('hi');
-		// 		}
-		// 	}
-		// }
-		// });
-	//},
 	getLatitudeLongitudegetWeather: function(address){
 		let that = this;
 		if (address === undefined){
@@ -185,7 +109,7 @@ let app = {
 					<div class="card-windSpeed">Wind Speed: ${obj.windSpeed} mph</div>
 					<div class="card-time">${moment.unix(obj.time).format('MMMM Do YYYY, h:mm:ss a')}</div>
 				</div>
-				<div class="card-ten-hour">asdfasdfasdf</div>
+				<div class="card-ten-hour"><div class="card-loading">LOADING data...</div></div>
 			</div>`
 		
 

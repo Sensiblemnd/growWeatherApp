@@ -4,6 +4,12 @@ layout: index
 ---
 <main>
 {{>loading}}
+<header>
+	<button class="reload">Reload</button> <div class="search"><form action="/search.html" class="search-wrapper cf">
+        <input type="text" placeholder="Search here..." required="">
+        <button type="submit">Search</button>
+    </form></div>
+</header>
 <div class="app">
 	<div class="current-weather">
 		<div class="card-clone"></div>
