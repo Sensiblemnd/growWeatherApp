@@ -108,6 +108,7 @@ gulp.task('jsVendor', function () {
 });
 
 
+
 gulp.task('favicon', function () {
 	return gulp.src('./src/favicon.ico')
 		.pipe(gulp.dest(config.dest));
@@ -169,6 +170,7 @@ gulp.task('serve', function () {
 	gulp.task('images:watch', ['images'], reload);
 	gulp.watch(config.src.images, ['images:watch']);
 	gulp.task('jsVendor');
+	gulp.task('fonts');
 
 });
 

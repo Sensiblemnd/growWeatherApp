@@ -27,10 +27,8 @@ $susy: (
 	'base/typography';
 
 @import 'vendor/normalize';
-@import 'partials/button';
 
-
-body {
-	font-family: sans-serif;
-}
+@import 'components/loading-screen';
+@import 'structures/card';
+@import 'structures/current-weather';
 
