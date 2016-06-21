@@ -53,10 +53,16 @@ let app = {
 		let that = this;
 		
 		$('body').on('click','.card',that.flipCard);
-
+		$('.search').on('submit','form',that.getNewZip);
 	
 	
 
+	},
+	getNewZip: function(e){
+		let that = app;
+
+		e.preventDefault();
+		that.getLatitudeLongitudegetWeather($('input[name=search]').val());
 	},
 	flipCard: function(e) {	
 		let that = app;
@@ -88,14 +94,34 @@ let app = {
 			dataType: 'json'
 		})
 		.done(function(json) {
+			//clear app
+			//Add the H2
+			//
+			$('.loading-screen').removeClass('close');
 			$.each(json.results, function(key, value) {
-				that.getWeather(value.geometry.location.lat,value.geometry.location.lng)
+		
+			$('h2').html(value.formatted_address);
 			});
+			if($('.card').length > 0){
+				$('.current-weather').find('.card').fadeOut('slow',function(){
+				$('.current-weather').html('');
+				$.each(json.results, function(key, value) {
+					that.getWeather(value.geometry.location.lat,value.geometry.location.lng)
+				});
+			});
+			}else{
+				$.each(json.results, function(key, value) {
+					that.getWeather(value.geometry.location.lat,value.geometry.location.lng)
+				});
+			}
+			
+			
 		})
 		.fail(function(jqXHR, textStatus) {
 			//console.log(textStatus);
 		});
 	},
+	
 	weatherCard: function(key,obj){
 		
 			return `<div class="card">
