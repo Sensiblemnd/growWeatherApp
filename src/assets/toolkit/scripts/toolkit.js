@@ -102,9 +102,10 @@ let app = {
 		
 			$('h2').html(value.formatted_address);
 			});
+			$('.current-weather').html('');
 			if($('.card').length > 0){
 				$('.current-weather').find('.card').fadeOut('slow',function(){
-				$('.current-weather').html('');
+				
 				$.each(json.results, function(key, value) {
 					that.getWeather(value.geometry.location.lat,value.geometry.location.lng)
 				});
