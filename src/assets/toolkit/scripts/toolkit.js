@@ -122,7 +122,7 @@ let app = {
 			
 		})
 		.fail(function(jqXHR, textStatus) {
-			//console.log(textStatus);
+			
 		});
 	},
 	hourlyTemplate: function(key,obj){
@@ -130,7 +130,6 @@ let app = {
 	},
 	weatherCard: function(key,obj,hourly){
 		let that = this;
-		//console.log(that.getTenHour(hourly,obj.time))
 			return `<div class="card card-${key}">
 				<div class="card-content">
 					<div class="card-icon" data-icon="${obj.icon}"><canvas id="${obj.icon}${key}" width="128" height="128"></canvas></div>
@@ -185,7 +184,7 @@ let app = {
 				$('.current-weather')
 				.append($(that.weatherCard(key,value,hourly)))
 				.find('.card-'+key+' .hourly').append(hourlyweather);
-				console.log($('.current-weather').find('.card-'+key+' .hourly'))
+				
 			});
 
 			$('.loading-screen').addClass('close');
@@ -201,7 +200,7 @@ let app = {
 	mainSummary: function(summary,iconData){
 		let that = this;
 		//Get the p and add summary
-		$('p').html(summary);
+		$('.weather p').html(summary);
 		$('body').addClass(iconData);
 		that.skycons.add('weekly',iconData);
 	},

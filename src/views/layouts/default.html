@@ -5,10 +5,11 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>{{title}}</title>
-	{{#if fabricator}}<link rel="stylesheet" href="{{baseurl}}/assets/fabricator/styles/f.css">{{/if}}
+	{{#if fabricator}}<link rel="stylesheet" href="./{{baseurl}}/assets/fabricator/styles/f.css">{{/if}}
 	<!-- toolkit styles -->
-	<link rel="stylesheet" href="{{baseurl}}/assets/toolkit/styles/toolkit.css" />
+	<link rel="stylesheet" href="./{{baseurl}}/assets/toolkit/styles/toolkit.css" />
 	<script src="./{{baseurl}}/assets/toolkit/scripts/vendor/modernizr-custom.js" />
+	<script src="./{{baseurl}}/assets/toolkit/scripts/vendor/skycons.js"></script>
 	<!-- /toolkit styles -->
 </head>
 <body>
@@ -26,11 +27,11 @@
 
 	{{#if fabricator}}
 		</div>
-	<script src="{{baseurl}}/assets/fabricator/scripts/f.js"></script>
+	<script src="./{{baseurl}}/assets/fabricator/scripts/f.js"></script>
 	{{/if}}
 
 	<!-- toolkit scripts -->
-	<script src="{{baseurl}}/assets/toolkit/scripts/toolkit.js"></script>
+	<script src="./{{baseurl}}/assets/toolkit/scripts/toolkit.js"></script>
 	<!-- /toolkit scripts -->
 
 </body>
