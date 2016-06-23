@@ -5,13 +5,17 @@ layout: index
 <main>
 {{>loading}}
 <header>
-	<button class="reload">Reload</button> <div class="search">
-	<form action="" class="search">
-        <input type="text" placeholder="Search here..." required=""  name="search" id="search">
-        <button type="submit">Search</button>
-    </form></div>
+	<button class="reload">Reload</button> 
+
+	<div class="search">
+		<form action="" class="search">
+			<input type="text" placeholder="Search here..." required=""  name="search" id="search"><button type="submit">Search</button>
+		</form>
+	</div>
 </header>
 <h2></h2>
+<div class="weekly-icon"><canvas id="weekly" width="128" height="128"></canvas></div>
+<p></p>
 <div class="app">
 	<div class="current-weather">
 		

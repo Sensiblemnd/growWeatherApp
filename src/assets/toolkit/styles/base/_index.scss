@@ -21,11 +21,9 @@
 		padding: 0;
 		overflow: visible;
 		font-family:  sans-serif;
-		
 		 font-weight: 400;
-		 background-color: #fff;
-		background-color: rgba(150, 194, 219, 0.8);
-		background-image: linear-gradient(to right, rgba(46, 76, 126, 0.7), transparent);  
+		background-color: rgb(46, 76, 126);
+		
 }
 body {
 	font-size: 16px; 
@@ -35,5 +33,41 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-family: 'Open Sans', sans-serif;
-	
+	clear-day
+	clear-night
+	&.rain {
+
+	}
+	&.snow {
+		
+	}
+	&.sleet {
+		
+	}
+	&.wind {
+		
+	}
+	&.fog {
+		
+	}
+	&.cloudy {
+		
+	}
+	&.partly-cloudy-day {
+		
+	}
+	&.partly-cloudy-night {
+		
+	}
+}
+
+header {
+	@include clearfix;
+	max-width: 1541px;
+	margin: 0 auto;
+	padding: 20px;
+	@media (max-width: 440px) {
+		text-align: center;	
+			
+	}
 }

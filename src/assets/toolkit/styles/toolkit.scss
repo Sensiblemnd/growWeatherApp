@@ -28,7 +28,13 @@ $susy: (
 
 @import 'vendor/normalize';
 
-@import 'components/loading-screen';
+@import 'components/loading-screen',
+ 	'components/search',
+ 	'components/hourly',
+ 	'components/weekly-icon',
+ 	'components/button';
+ 	
+
 @import 'structures/card';
 @import 'structures/current-weather';
 

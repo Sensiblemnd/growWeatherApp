@@ -37,7 +37,7 @@ let  log = {
 };
 
 let app = {
-	InstagramImage: '',
+	zipCode: '',
 	init: function() {
 		let that = this;
 		
@@ -47,22 +47,27 @@ let app = {
 		
 	},
 	loadingScreen: function(){
+		let that = app;
 		that.loader = $('.loading-screen');
 	},
 	eventListener: function(){
 		let that = this;
 		
 		$('body').on('click','.card',that.flipCard);
+		$('.reload').on('click',that.reload);
 		$('.search').on('submit','form',that.getNewZip);
-	
-	
-
+	},
+	reload: function (){
+		let that = app;
+		//check that we dont have a new Zip
+		that.getLatitudeLongitudegetWeather(that.zipCode);
 	},
 	getNewZip: function(e){
 		let that = app;
 
 		e.preventDefault();
-		that.getLatitudeLongitudegetWeather($('input[name=search]').val());
+		that.zipCode = $('input[name=search]').val()
+		that.getLatitudeLongitudegetWeather(that.zipCode);
 	},
 	flipCard: function(e) {	
 		let that = app;
@@ -85,7 +90,7 @@ let app = {
 	},
 	getLatitudeLongitudegetWeather: function(address){
 		let that = this;
-		if (address === undefined){
+		if (address === undefined || address === ''){
 			address = "northfolk+va";
 		}
 		$.getJSON({
@@ -94,9 +99,7 @@ let app = {
 			dataType: 'json'
 		})
 		.done(function(json) {
-			//clear app
-			//Add the H2
-			//
+			
 			$('.loading-screen').removeClass('close');
 			$.each(json.results, function(key, value) {
 		
@@ -122,10 +125,13 @@ let app = {
 			//console.log(textStatus);
 		});
 	},
-	
-	weatherCard: function(key,obj){
-		
-			return `<div class="card">
+	hourlyTemplate: function(key,obj){
+		return  `<li> ${obj.summary}  ${obj.temperature} &#8457; ${moment.unix(obj.time).format('hh:mm a')}</li>`
+	},
+	weatherCard: function(key,obj,hourly){
+		let that = this;
+		//console.log(that.getTenHour(hourly,obj.time))
+			return `<div class="card card-${key}">
 				<div class="card-content">
 					<div class="card-icon" data-icon="${obj.icon}"><canvas id="${obj.icon}${key}" width="128" height="128"></canvas></div>
 					<div class="card-summary">${obj.summary}</div>
@@ -134,26 +140,52 @@ let app = {
 					<div class="card-humidity">Humidity: ${obj.humidity}</div>
 					<div class="card-visibility">Visibility: ${obj.visibility} mi</div>
 					<div class="card-windSpeed">Wind Speed: ${obj.windSpeed} mph</div>
-					<div class="card-time">${moment.unix(obj.time).format('MMMM Do YYYY, h:mm:ss a')}</div>
+					<div class="card-time">${moment.unix(obj.time).format('MMMM Do YYYY')}</div>
 				</div>
-				<div class="card-ten-hour"><div class="card-loading">LOADING data...</div></div>
+				<div class="card-ten-hour">
+					<div class="hourly">
+						<div class="loading">LOADING DATA....</div>
+					</div>
+				</div>
 			</div>`
 		
 
 	},
+	getTenHour: function(data,date){
+		let that = this;
+		let count= 0;
+		let $theUL = $('<ul></ul>');
+		
+		$.each(data, function(key,value) {
+			if(moment.unix(date).format('MMMM Do YYYY') === moment.unix(value.time).format('MMMM Do YYYY') ){
+				$theUL.append(that.hourlyTemplate(key,value));
+			};
+		});
+
+		return $theUL
+		
+	},
 	getWeather: function(lat,long){
 		let that = this;
+		that.lat = lat;
+		that.long = long;
 		 let $test = $.getJSON('https://api.forecast.io/forecast/c641f783a18d89fe2ec4bc1234e31290/'+lat+',' + long  + "?callback=?",
 		 	{
-		 		extend: "hourly",
+		 		extend: 'hourly',
 		 		exclude: "minutely,alerts, flags"
 		 	}
 		 	,function (insta) {			
 		}) .done(function(json) {
-			
+			let hourly = json.hourly.data;
+			//Add the summary for the week
+			that.mainSummary(json.daily.summary,json.daily.icon)
+		
 			$.each(json.daily.data, function(key,value) {
-				
-				$('.current-weather').append($(that.weatherCard(key,value)));
+				let hourlyweather = that.getTenHour(hourly,value.time)
+				$('.current-weather')
+				.append($(that.weatherCard(key,value,hourly)))
+				.find('.card-'+key+' .hourly').append(hourlyweather);
+				console.log($('.current-weather').find('.card-'+key+' .hourly'))
 			});
 
 			$('.loading-screen').addClass('close');
@@ -166,7 +198,13 @@ let app = {
 		  });
 		
 	},
-
+	mainSummary: function(summary,iconData){
+		let that = this;
+		//Get the p and add summary
+		$('p').html(summary);
+		$('body').addClass(iconData);
+		that.skycons.add('weekly',iconData);
+	},
 	initIcons: function(clone){
 		let that = this;
 		if(!clone){

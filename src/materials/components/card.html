@@ -1,13 +1,17 @@
-<div class="card">
+<div class="card card-${key}">
 	<div class="card-content">
-		<canvas id="${obj.icon}" width="128" height="128"></canvas>
+		<div class="card-icon" data-icon="${obj.icon}"><canvas id="${obj.icon}${key}" width="128" height="128"></canvas></div>
 		<div class="card-summary">${obj.summary}</div>
-		<div class="card-temp">${obj.temperature}</div>
-		<div class="card-temp">${obj.temperature}</div>
-		<div class="card-humidity">${obj.humidity}</div>
-		<div class="card-visibility">${obj.visibility} miles</div>
-		<div class="card-windSpeed">${obj.windSpeed} mph</div>
-		<div class="card-time">${moment.unix(obj.time).format('MMMM Do YYYY, h:mm:ss a')}</div>
+		<div class="card-apparentTemperatureMax">Max Temp: ${obj.apparentTemperatureMax} &#8457;</div>
+		<div class="card-apparentTemperatureMin">Min Temp: ${obj.apparentTemperatureMin} &#8457;</div>
+		<div class="card-humidity">Humidity: ${obj.humidity}</div>
+		<div class="card-visibility">Visibility: ${obj.visibility} mi</div>
+		<div class="card-windSpeed">Wind Speed: ${obj.windSpeed} mph</div>
+		<div class="card-time">${moment.unix(obj.time).format('MMMM Do YYYY')}</div>
 	</div>
-	<div class="datatest">asdfasdfasdf</div>
+	<div class="card-ten-hour">
+		<div class="hourly">
+			
+		</div>
+	</div>
 </div>
